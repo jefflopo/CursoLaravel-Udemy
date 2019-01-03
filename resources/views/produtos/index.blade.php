@@ -11,15 +11,34 @@
 		<div class="col-md-12">
 			<form method="POST" action="{{url('produtos/busca')}}">
 				{{ csrf_field() }}
-				<div class="input-group mb-3 col-md-12">
+				<div class="input-group">
 					<input type="text" class="form-control" id="busca" name="busca" placeholder="Procurar produto no site.." value="{{$buscar}}">
-					<div class="input-group-append col-md-12">
-						<button class="btn btn-outline-secondary">Buscar</button>
-					</div>
+					<span class="input-group-btn">
+					  <button class="btn btn-outline-secondary" type="button">Buscar</button>
+					</span>
 				</div>
 			</form>
 		</div>
+		<div class="col-md-12" style="margin-top: 10px; margin-bottom: 10px">
+			<form method="POST" action="{{url('produtos/ordem')}}">
+				{{ csrf_field() }}
+				<div class="input-group">
+					<select id="ordem" name="ordem" class="form-control">
+						<option>Escolha a Ordem</option>
+						<option value="1" @if($ordem == 1) selected @endif>Título (A-Z)</option>
+						<option value="2" @if($ordem == 2) selected @endif>Título (Z-A)</option>
+						<option value="3" @if($ordem == 3) selected @endif>Valor (Maior-Menor)</option>
+						<option value="4" @if($ordem == 4) selected @endif>Valor (Menor-Maior)</option>
+					</select>
+					<span class="input-group-btn">
+					  <button class="btn btn-outline-secondary" >Ordenar</button>
+					</span>
+				</div>
+			</form>
+		</div>
+
 	</div>
+
 	<div class="row">
 		@foreach($produtos as $produto)
 		<div class="col-md-3">
@@ -31,6 +50,7 @@
 			<h4 class="text-center">
 				<a href="{{URL::to('produtos')}}/{{$produto->id}}">{{$produto->titulo}}</a>
 			</h4>
+			<p class="text-center">R$ {{number_format($produto->preco, 2, ',', '.')}}</p>
 			@if(Auth::check())
 			<div class="mb-3">
 				<form method="POST" enctype="multipart/form-data" action="{{action('ProdutosController@destroy', $produto->id)}}">

@@ -7,7 +7,7 @@ use Mail;
 
 class ContatoController extends Controller
 {
-    public function index()
+    public function index() 
     {
         $data['titulo'] = "Contato";
         return view('contato', $data);

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.app') 
 @section('content')
 	<div class="row">
 		<h4 class="mb-3">Contato pelo Site</h4>
