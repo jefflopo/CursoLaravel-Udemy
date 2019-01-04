@@ -31,7 +31,7 @@
 						<option value="4" @if($ordem == 4) selected @endif>Valor (Menor-Maior)</option>
 					</select>
 					<span class="input-group-btn">
-					  <button class="btn btn-outline-secondary" >Ordenar</button>
+					  <button class="btn btn-secondary" >Ordenar</button>
 					</span>
 				</div>
 			</form>
@@ -49,6 +49,12 @@
 			@endif
 			<h4 class="text-center">
 				<a href="{{URL::to('produtos')}}/{{$produto->id}}">{{$produto->titulo}}</a>
+				@if($produto->preco == $maiscaro)
+				<span class="badge badge-pill badge-danger">Maior Preço</span>
+				@endif
+				@if($produto->preco == $maisbarato)
+				<span class="badge badge-secondary badge-success">Menor Preço</span>
+				@endif
 			</h4>
 			<p class="text-center">R$ {{number_format($produto->preco, 2, ',', '.')}}</p>
 			@if(Auth::check())
@@ -64,6 +70,18 @@
 		</div>
 		
 		@endforeach
+	</div>
+	<div>
+		<p><strong>O valor médio dos produtos é: </strong>R$ {{number_format($mediavalor, 2, ',', '.')}}</p>
+	</div>
+	<div>
+		<p><strong>A soma dos produtos é: </strong>R$ {{number_format($somaProds, 2, ',', '.')}}</p>
+	</div>
+	<div>
+		<p><strong>A quantidade de produtos é: </strong>{{$quantidade}}</p>
+	</div>
+	<div>
+		<p><strong>A quantidade de produtos maior de R$ 10,00 é: </strong>{{$maiorDezP}}</p>
 	</div>
 	{{$produtos->links()}}
 @endsection

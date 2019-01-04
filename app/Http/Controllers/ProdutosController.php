@@ -10,12 +10,24 @@ class ProdutosController extends Controller
 {
     public function index(){
     	$produtos = Produtos::paginate(4);
-    	return view('produtos.index', array('produtos'=> $produtos, 'buscar'=> null ,'ordem' => null));
+        $maiscaro = Produtos::all()->max('preco');
+        $maisbarato = Produtos::all()->min('preco');
+        $media = Produtos::all()->avg('preco');
+        $soma = Produtos::all()->sum('preco');
+        $contagem = Produtos::all()->count();
+        $maiorDez = Produtos::where('preco', '>', 10)->count();
+    	return view('produtos.index', array('produtos'=> $produtos, 'buscar'=> null ,'ordem' => null, 'maiscaro' => $maiscaro, 'maisbarato' => $maisbarato, 'mediavalor' => $media, 'somaProds' => $soma, 'quantidade' => $contagem, 'maiorDezP' => $maiorDez));
     }
 
     public function show($id){
-    	$produto = Produtos::find($id);
-    	return view('produtos.show', array('produto'=> $produto));
+    	$produto = Produtos::with('mostrarComentarios')->find($id);
+        $maiscaro = Produtos::all()->max('preco');
+        $maisbarato = Produtos::all()->min('preco');
+        $media = Produtos::all()->avg('preco');
+        $soma = Produtos::all()->sum('preco');
+        $contagem = Produtos::all()->count();
+        $maiorDez = Produtos::where('preco', '>', 10)->count();
+    	return view('produtos.show', array('produto'=> $produto, 'buscar'=> null ,'ordem' => null, 'maiscaro' => $maiscaro, 'maisbarato' => $maisbarato, 'mediavalor' => $media, 'somaProds' => $soma, 'quantidade' => $contagem, 'maiorDezP' => $maiorDez));
     }
 
     public function create(){
@@ -100,7 +112,7 @@ class ProdutosController extends Controller
     	$buscaInput = $request->input('busca');
     	$produtos = Produtos::where('titulo', 'LIKE', '%'.$buscaInput.'%')->orwhere('descricao', 'LIKE', '%'.$buscaInput.'%')->paginate(4);
 
-    	return view('produtos.index', array('produtos'=> $produtos, 'buscar'=> $buscaInput,'ordem' => null ));
+    	return view('produtos.index', array('produtos'=> $produtos, 'buscar'=> $buscaInput,'ordem' => null, 'maiscaro' => null, 'maisbarato' => null, 'mediavalor' => null, 'somaProds' => null, 'quantidade' => null, 'maiorDezP' => null ));
     }
 
     public function ordem(Request $request)
@@ -121,6 +133,6 @@ class ProdutosController extends Controller
         }
         $produtos = Produtos::orderBy($campo, $tipo)->paginate(4);
 
-        return view('produtos.index', array('produtos'=> $produtos, 'buscar'=> null, 'ordem' => $ordemInput ));
+        return view('produtos.index', array('produtos'=> $produtos, 'buscar'=> null, 'ordem' => $ordemInput, 'maiscaro' => null, 'maisbarato' => null, 'mediavalor' => null, 'somaProds' => null, 'quantidade' => null, 'maiorDezP' => null ));
     }
 }
