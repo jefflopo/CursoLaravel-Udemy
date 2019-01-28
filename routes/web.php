@@ -17,9 +17,14 @@ Route::get('/', function () {
 
 Route::get('/contato', 'ContatoController@index');
 Route::post('/contato/enviar', 'ContatoController@enviar');
-Route::resource('/produtos', 'ProdutosController');
-Route::post('/produtos/busca', 'ProdutosController@busca');
-Route::post('/produtos/ordem', 'ProdutosController@ordem');
+
+Route::resource('/alunos', 'AlunosController');
+Route::post('/alunos/busca', 'AlunosController@busca');
+Route::post('/alunos/ordem', 'AlunosController@ordem');
+
+Route::resource('/professores', 'ProfessoresController');
+Route::post('/professores/busca', 'ProfessoresController@busca');
+Route::post('/professores/ordem', 'ProfessoresController@ordem');
 
 Auth::routes();
 

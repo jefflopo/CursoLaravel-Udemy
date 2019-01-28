@@ -37,8 +37,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{ url('produtos/') }}">Produtos</a></li>
-                        <li><a href="{{ url('contato/') }}">Contato</a></li>
+                        <li><a href="{{ url('alunos/') }}">Alunos</a></li>
+                        <li><a href="{{ url('professores/') }}">Professores</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -48,7 +48,8 @@
                             <li><a href="{{ route('login') }}">Entrar</a></li>
                             <li><a href="{{ route('register') }}">Cadastrar-se</a></li>
                         @else
-                            <li><a href="{{ url('produtos/create') }}">Inserir Produtos</a></li>
+                            <li><a href="{{ url('alunos/create') }}">Cadastrar Alunos</a></li>
+                            <li><a href="{{ url('professores/create') }}">Cadastrar Professores</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -80,5 +81,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    
 </body>
 </html>

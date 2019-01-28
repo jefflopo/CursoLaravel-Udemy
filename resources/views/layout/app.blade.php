@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>Nosso Site - @yield('title')</title>
+	<title>CadastroLiket - @yield('title')</title>
 	<link rel="stylesheet" type="text/css" href="{{URL::to('dist/css/bootstrap.min.css')}}">
 </head>
 <body>
